@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { StyleSheet, Text, View } from "react-native"
 
 import Card from "./Card"
+import toWeather, { type Weather } from "./toWeather"
 
 const CurrentWeather: React.FC<{
   location: {
@@ -11,7 +12,7 @@ const CurrentWeather: React.FC<{
   }
 }> = ({ location }) => {
   const [data, setData] = useState<{
-    condition: number
+    condition: Weather
     temperature: number
     wind: number
     humidity: number
@@ -34,7 +35,7 @@ const CurrentWeather: React.FC<{
       }
 
       setData({
-        condition: data.current.weather_code,
+        condition: toWeather(data.current.weather_code),
         temperature: data.current.temperature_2m,
         wind: data.current.wind_speed_10m,
         humidity: data.current.relative_humidity_2m,

@@ -1,5 +1,4 @@
 import { Link, Stack } from "expo-router"
-import { StatusBar } from "expo-status-bar"
 import { StyleSheet, Text, View } from "react-native"
 
 import CurrentWeather from "../CurrentWeather"
@@ -18,9 +17,7 @@ const App: React.FC = () => {
         <CurrentWeather location={location} />
         <Forecast location={location} />
 
-        <Link href="/temp">Go to Temporarity</Link>
-
-        <StatusBar style="auto" />
+        <Link href="/temp">Go to Temporary</Link>
       </View>
     </>
   )
@@ -31,7 +28,7 @@ export default App
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     alignItems: "center",
     justifyContent: "center",
   },

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { ScrollView, StyleSheet, Text, View } from "react-native"
 
 import Card from "./Card"
+import toWeather, { type Weather } from "./toWeather"
 
 const Forecast: React.FC<{
   location: {
@@ -15,7 +16,7 @@ const Forecast: React.FC<{
       day: string
       temperatureMax: number
       temperatureMin: number
-      condition: number
+      condition: Weather
     }>
   >()
 
@@ -39,7 +40,7 @@ const Forecast: React.FC<{
           day: data.daily.time[i],
           temperatureMax: data.daily.temperature_2m_max[i],
           temperatureMin: data.daily.temperature_2m_min[i],
-          condition: data.daily.weather_code[i],
+          condition: toWeather(data.daily.weather_code[i]),
         })
       }
 
