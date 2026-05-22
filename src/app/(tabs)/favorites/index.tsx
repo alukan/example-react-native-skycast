@@ -4,11 +4,14 @@ import { StyleSheet, Text, View } from "react-native"
 const App: React.FC = () => {
   return (
     <>
-      <Stack.Screen options={{ title: "Temporary" }} />
+      <Stack.Screen options={{ title: "Favorites" }} />
 
       <View style={styles.container}>
-        <Text>Temporary</Text>
-        <Link href="/">Home</Link>
+        <Text>Favorites</Text>
+
+        <Link href="/favorites/one">One</Link>
+        <Link href="/favorites/two">Two</Link>
+        <Link href="/favorites/three">Three</Link>
       </View>
     </>
   )
