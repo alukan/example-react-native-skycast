@@ -6,13 +6,10 @@ import Typography from "#design/elements/Typegraphy"
 import { spacing } from "#design/foundations"
 
 import toWeather, { type Weather } from "./toWeather"
+import { type WeatherLocation } from "./types"
 
 export const CurrentWeather: React.FC<{
-  location: {
-    name: string
-    latitude: number
-    longitude: number
-  }
+  location?: WeatherLocation
 }> = ({ location }) => {
   const [data, setData] = useState<{
     condition: Weather
@@ -24,6 +21,8 @@ export const CurrentWeather: React.FC<{
 
   useEffect(() => {
     void (async () => {
+      if (!location) return
+
       const response = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,is_day,weather_code,wind_speed_10m,relative_humidity_2m,uv_index`,
       )
@@ -51,7 +50,7 @@ export const CurrentWeather: React.FC<{
     <Card>
       <View style={styles.current}>
         <Typography variant="title">{data?.temperature ?? "--"} C</Typography>
-        <Typography variant="muted">{location.name}</Typography>
+        <Typography variant="muted">{location?.name ?? "--"}</Typography>
         <Typography variant="label">{data?.condition ?? "--"}</Typography>
       </View>
 

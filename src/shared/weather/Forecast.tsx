@@ -6,13 +6,10 @@ import Typography from "#design/elements/Typegraphy"
 import { spacing } from "#design/foundations"
 
 import toWeather, { type Weather } from "./toWeather"
+import { type WeatherLocation } from "./types"
 
 export const Forecast: React.FC<{
-  location: {
-    name: string
-    latitude: number
-    longitude: number
-  }
+  location?: WeatherLocation
 }> = ({ location }) => {
   const [data, setData] = useState<
     Array<{
@@ -25,6 +22,8 @@ export const Forecast: React.FC<{
 
   useEffect(() => {
     void (async () => {
+      if (!location) return
+
       const response = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&daily=temperature_2m_max,temperature_2m_min,weather_code`,
       )
