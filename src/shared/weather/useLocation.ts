@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import * as Location from "expo-location"
 import { useEffect, useState } from "react"
 
 import { type WeatherLocation } from "./types"
@@ -9,14 +10,34 @@ export function useLocation(): WeatherLocation | undefined {
   const [location, setLocation] = useState<WeatherLocation>()
 
   useEffect(() => {
+    async function getDeviceLocation() {
+      const { status } = await Location.requestForegroundPermissionsAsync()
+      if (status !== Location.PermissionStatus.GRANTED) {
+        console.log("Permission to access location was denied")
+        return undefined
+      }
+
+      try {
+        const location = await Location.getCurrentPositionAsync()
+
+        return {
+          name: "Here",
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        }
+      } catch (error) {
+        console.error(error)
+        return undefined
+      }
+    }
+
     void (async () => {
-      // const currentLocation = await getDeviceLocation()
-      // if (currentLocation) {
-      //   const location = {...}
-      //   setLocation(location)
-      //   await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(location))
-      //   return
-      // }
+      const currentLocation = await getDeviceLocation()
+      if (currentLocation) {
+        setLocation(currentLocation)
+        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(currentLocation))
+        return
+      }
 
       const cachedLocation = await AsyncStorage.getItem(STORAGE_KEY)
       if (cachedLocation) {

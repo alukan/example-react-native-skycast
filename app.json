@@ -3,7 +3,7 @@
     "name": "SkyCast",
     "slug": "SkyCast",
     "version": "1.0.0",
-    "scheme": "your-app-scheme",
+    "scheme": "skycast",
     "icon": "./assets/icon.png",
     "orientation": "default",
     "userInterfaceStyle": "automatic",
@@ -13,7 +13,16 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "plugins": ["expo-router", "expo-screen-orientation"],
+    "plugins": [
+      "expo-router",
+      "expo-screen-orientation",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ]
+    ],
     "experiments": {
       "typedRoutes": true
     },
