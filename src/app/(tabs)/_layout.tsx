@@ -1,5 +1,6 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome"
 import { Tabs } from "expo-router"
+
+import Icon from "#design/elements/Icon"
 
 const Layout: React.FC = () => {
   return (
@@ -9,7 +10,7 @@ const Layout: React.FC = () => {
         options={{
           title: "Home",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome size={size} name="home" color={color} />
+            <Icon name="home" size={size} color={color} />
           ),
         }}
       />
@@ -18,7 +19,7 @@ const Layout: React.FC = () => {
         options={{
           title: "Favorites",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome size={size} name="star" color={color} />
+            <Icon name="favorites" size={size} color={color} />
           ),
         }}
       />
@@ -27,7 +28,7 @@ const Layout: React.FC = () => {
         options={{
           title: "Settings",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome size={size} name="gear" color={color} />
+            <Icon name="settings" size={size} color={color} />
           ),
         }}
       />

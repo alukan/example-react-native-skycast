@@ -1,5 +1,7 @@
-import { Link, Stack } from "expo-router"
-import { StyleSheet, Text, View } from "react-native"
+import { Stack } from "expo-router"
+import { StyleSheet, View } from "react-native"
+
+import Typography from "#design/elements/Typegraphy"
 
 const App: React.FC = () => {
   return (
@@ -7,8 +9,8 @@ const App: React.FC = () => {
       <Stack.Screen options={{ title: "Temporary" }} />
 
       <View style={styles.container}>
-        <Text>Temporary</Text>
-        <Link href="/">Home</Link>
+        <Typography variant="title">Temporary</Typography>
+        <Typography href="/">Go Home</Typography>
       </View>
     </>
   )

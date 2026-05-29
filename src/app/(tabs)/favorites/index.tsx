@@ -1,17 +1,22 @@
-import { Link, Stack } from "expo-router"
-import { StyleSheet, Text, View } from "react-native"
+import { Stack } from "expo-router"
+import { StyleSheet, View } from "react-native"
+
+import Typography from "#design/elements/Typegraphy"
+import { useFavorites } from "#shared/favorites"
 
 const App: React.FC = () => {
+  const [favorites] = useFavorites()
+
   return (
     <>
       <Stack.Screen options={{ title: "Favorites" }} />
 
       <View style={styles.container}>
-        <Text>Favorites</Text>
-
-        <Link href="/favorites/one">One</Link>
-        <Link href="/favorites/two">Two</Link>
-        <Link href="/favorites/three">Three</Link>
+        {favorites.map((favorite) => (
+          <Typography key={favorite.name} href={`/favorites/${favorite.name}`}>
+            {favorite.name}
+          </Typography>
+        ))}
       </View>
     </>
   )

@@ -1,16 +1,20 @@
 import { Stack, useLocalSearchParams } from "expo-router"
 import { StyleSheet, View } from "react-native"
 
+import { useFavorites } from "#shared/favorites"
 import { CurrentWeather, Forecast } from "#shared/weather"
-
-const location = { name: "Reno", latitude: 39.5299, longitude: 119.8143 }
 
 const App: React.FC = () => {
   const { id } = useLocalSearchParams<{ id: string }>()
 
+  const [favorites] = useFavorites()
+  const location = favorites.find((favorite) => favorite.name === id)
+
   return (
     <>
-      <Stack.Screen options={{ title: `Favorite ${id}` }} />
+      <Stack.Screen
+        options={{ title: `Favorite: ${location?.name ?? "--"}` }}
+      />
 
       <View style={styles.container}>
         <CurrentWeather location={location} />
